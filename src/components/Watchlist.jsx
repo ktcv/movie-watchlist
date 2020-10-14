@@ -1,13 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import MovieCard from './MovieCard'
+import Modal from './Modal'
+import MovieDetail from './MovieDetail'
 
 const Watchlist = () => {
   // access watchlist from global context
   const { watchlist } = useContext(GlobalContext)
 
+  // modal state
+  const [modalVisible, setModalVisible] = useState(false)
+  const [modalMovie, setModalMovie] = useState({})
+
+  // functions to toggle modal visibility
+  const showModal = (movie) => {
+    setModalMovie(movie)
+    setModalVisible(true)
+  }
+
+  const hideModal = () => {
+    if (modalVisible) {
+      setModalMovie({})
+      setModalVisible(false)
+    }
+  }
+
   return (
-    <div className='movie-page'>
+    <div className='movie-page' onClick={hideModal}>
       <div className='container'>
         <div className='header'>
           <h1 className='heading'>Watchlist</h1>
@@ -20,13 +39,21 @@ const Watchlist = () => {
         {watchlist.length > 0 ? (
           <div className='movie-grid'>
             {watchlist.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} type='watchlist' />
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                showModal={showModal}
+                type='watchlist'
+              />
             ))}
           </div>
         ) : (
           <h2 className='no-movies'>No movies in your list, add some!</h2>
         )}
       </div>
+      <Modal show={modalVisible}>
+        <MovieDetail movie={modalMovie} />
+      </Modal>
     </div>
   )
 }

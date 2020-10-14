@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 
-const ResultCard = ({ movie }) => {
+const ResultCard = ({ movie, showModal }) => {
   // access global context
   const {
     addMovieToWatchlist,
@@ -20,7 +20,7 @@ const ResultCard = ({ movie }) => {
 
   return (
     <div className='result-card'>
-      <div className='poster-wrapper'>
+      <div className='poster-wrapper' onClick={() => showModal(movie)}>
         {movie.poster_path ? (
           <img
             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -34,8 +34,14 @@ const ResultCard = ({ movie }) => {
       <div className='info'>
         <div className='header'>
           <h3 className='title'>{movie.title}</h3>
-          <h4 className='release-date'>
+          <h4 className='subheading'>
             {movie.release_date ? movie.release_date.substring(0, 4) : ' '}
+          </h4>
+          <h4 className='subheading'>
+            <span>
+              <i className='fas fa-star'></i>
+            </span>{' '}
+            {movie.vote_average}
           </h4>
         </div>
 
