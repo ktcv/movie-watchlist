@@ -10,21 +10,38 @@ const MovieControls = ({ movie, type }) => {
     moveMovieToWatchlist,
   } = useContext(GlobalContext)
 
+  const handleMoveToWatched = (event) => {
+    event.stopPropagation()
+    moveMovieToWatched(movie)
+  }
+
+  const handleRemoveFromWatchlist = (event) => {
+    event.stopPropagation()
+    removeMovieFromWatchlist(movie.id)
+  }
+
+  const handleMoveToWatchlist = (event) => {
+    event.stopPropagation()
+    moveMovieToWatchlist(movie)
+  }
+
+  const handleRemoveFromWatched = (event) => {
+    event.stopPropagation()
+    removeMovieFromWatched(movie.id)
+  }
+
   return (
     <div className='inner-card-controls'>
       {type === 'watchlist' && (
         <>
           <button className='ctrl-btn'>
-            <i
-              className='fa-fw far fa-eye'
-              onClick={() => moveMovieToWatched(movie)}
-            ></i>
+            <i className='fa-fw far fa-eye' onClick={handleMoveToWatched}></i>
           </button>
 
           <button className='ctrl-btn'>
             <i
               className='fa-fw fa fa-times'
-              onClick={() => removeMovieFromWatchlist(movie.id)}
+              onClick={handleRemoveFromWatchlist}
             ></i>
           </button>
         </>
@@ -35,14 +52,14 @@ const MovieControls = ({ movie, type }) => {
           <button className='ctrl-btn'>
             <i
               className='fa-fw far fa-eye-slash'
-              onClick={() => moveMovieToWatchlist(movie)}
+              onClick={handleMoveToWatchlist}
             ></i>
           </button>
 
           <button className='ctrl-btn'>
             <i
               className='fa-fw fa fa-times'
-              onClick={() => removeMovieFromWatched(movie.id)}
+              onClick={handleRemoveFromWatched}
             ></i>
           </button>
         </>
