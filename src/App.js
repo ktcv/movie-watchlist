@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Watchlist from './components/Watchlist'
 import Watched from './components/Watched'
@@ -12,7 +12,7 @@ import { GlobalProvider } from './context/GlobalState'
 const App = () => {
   return (
     <GlobalProvider>
-      <Router>
+      <Router basename='/'>
         <Header />
 
         <Switch>
