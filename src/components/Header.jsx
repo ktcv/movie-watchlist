@@ -12,7 +12,7 @@ const Header = () => {
 
           <ul className='nav-links'>
             <li>
-              <Link to='/'>Watch List</Link>
+              <Link to='/watchlist'>Watchlist</Link>
             </li>
 
             <li>
@@ -20,8 +20,8 @@ const Header = () => {
             </li>
 
             <li>
-              <Link className='btn' to='/add'>
-                + Add
+              <Link className='btn' to='/search'>
+                Search
               </Link>
             </li>
           </ul>

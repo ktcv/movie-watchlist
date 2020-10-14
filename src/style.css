@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
 
 :root {
-  --primary: #032541;
-  --secondary: #21d07a;
-  --white: #fff;
+  --primary: #2d3436;
+  --secondary: #74b9ff;
+  --tertiary: #0984e3;
+  --white: #eeeeee;
+  --offwhite: #bbbbbb;
 }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: var(--white);
   padding: 0;
   margin: 0;
 }
@@ -58,7 +61,7 @@ body {
 }
 
 .btn:hover {
-  background-color: #1aa762;
+  background-color: var(--tertiary);
   opacity: 1;
   cursor: pointer;
 }
@@ -117,21 +120,33 @@ header .nav-links li:last-child {
   margin-right: 0;
 }
 
-/* Add Page */
+/* Search Page */
 .add-content {
   padding: 50px 0;
   max-width: 600px;
   margin: 0 auto;
 }
 
+.add-content .input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .add-content .input-wrapper input {
   width: 100%;
-  background-color: var(--primary);
+  background-color: var(--white);
   padding: 10px;
-  border-radius: 5px;
-  border: none;
-  color: var(--white);
+  border-radius: 30px;
+  border: solid 1px var(--offwhite);
+  color: var(--primary);
   font-size: 1.25rem;
+  padding-left: 20px;
+}
+
+.fa-search {
+  position: relative;
+  color: var(--offwhite);
+  right: 33px;
 }
 
 .results {

@@ -42,6 +42,7 @@ const Add = () => {
               value={query}
               onChange={onChange}
             />
+            <i className='fa fa-search'></i>
           </div>
           <ul className='results'>
             {results.length > 0 &&

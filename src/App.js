@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Watchlist from './components/Watchlist'
 import Watched from './components/Watched'
-import Add from './components/Add'
+import Search from './components/Search'
 import './style.css'
 import './lib/font-awesome/css/all.min.css'
 
@@ -16,16 +16,16 @@ const App = () => {
         <Header />
 
         <Switch>
-          <Route exact path='/'>
+          <Route exact path={['/', '/search']}>
+            <Search />
+          </Route>
+
+          <Route path='/watchlist'>
             <Watchlist />
           </Route>
 
           <Route path='/watched'>
             <Watched />
-          </Route>
-
-          <Route path='/add'>
-            <Add />
           </Route>
         </Switch>
       </Router>
