@@ -10,7 +10,7 @@ const Watchlist = () => {
     <div className='movie-page'>
       <div className='container'>
         <div className='header'>
-          <h1 className='heading'>My Watchlist</h1>
+          <h1 className='heading'>Watchlist</h1>
         </div>
 
         {watchlist.length > 0 ? (
@@ -20,7 +20,7 @@ const Watchlist = () => {
             ))}
           </div>
         ) : (
-          <h2>No movies in your list</h2>
+          <h2 className='no-movies'>No movies in your list, add some!</h2>
         )}
       </div>
     </div>

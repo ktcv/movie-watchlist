@@ -6,7 +6,7 @@ const Add = () => {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
 
-  const [debouncedQuery] = useDebounce(query, 500)
+  const [debouncedQuery] = useDebounce(query, 250)
 
   useEffect(() => {
     if (debouncedQuery === '') {
