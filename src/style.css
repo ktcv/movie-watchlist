@@ -1,15 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 :root {
-  --primary: #2d3436;
+  --primary: #222729;
   --secondary: #74b9ff;
   --tertiary: #0984e3;
   --white: #eeeeee;
   --offwhite: #bbbbbb;
 }
 
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
 body {
-  font-family: 'Helvetica Neue', sans-serif;
   background-color: var(--white);
   padding: 0;
   margin: 0;
@@ -50,7 +53,7 @@ body {
   padding: 10px 15px;
   background-color: var(--secondary);
   color: var(--primary);
-  border-radius: 5px;
+  border-radius: 30px;
   font-weight: 500;
   display: inline-block;
   border: none;
@@ -219,8 +222,21 @@ header .nav-links li:last-child {
   margin: 5px 0 0 0;
 }
 
-.result-card .controls button {
+.result-card .controls {
+  display: flex;
   margin-right: 10px;
+}
+
+.result-card .button-text {
+  background-color: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.result-card .button-text:disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 /* Movie Page */

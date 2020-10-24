@@ -47,7 +47,7 @@ const ResultCard = ({ movie, showModal }) => {
 
         <div className='controls'>
           <button
-            className='btn'
+            className='button-text'
             onClick={() => addMovieToWatchlist(movie)}
             disabled={disableButton}
           >
@@ -55,7 +55,7 @@ const ResultCard = ({ movie, showModal }) => {
           </button>
 
           <button
-            className='btn'
+            className='button-text'
             onClick={() => moveMovieToWatched(movie)}
             disabled={disableWatched}
           >
