@@ -1,9 +1,16 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { FirebaseContext } from '../context/firebase'
+import { UserContentContext } from '../context/UserContentContext'
 
 const MovieControls = ({ movie, type, user }) => {
   const { firebase } = useContext(FirebaseContext)
+  const {
+    userWatchlist,
+    userWatched,
+    setUserWatchlist,
+    setUserWatched,
+  } = useContext(UserContentContext)
 
   // access global context
   const {
@@ -14,6 +21,8 @@ const MovieControls = ({ movie, type, user }) => {
   } = useContext(GlobalContext)
 
   const moveMovieToUserWatchlist = () => {
+    setUserWatched(userWatched.filter((i) => i.id !== movie.id))
+
     firebase
       .firestore()
       .collection('userWatchlist')
@@ -27,6 +36,8 @@ const MovieControls = ({ movie, type, user }) => {
   }
 
   const moveMovieToUserWatched = () => {
+    setUserWatchlist(userWatchlist.filter((i) => i.id !== movie.id))
+
     firebase
       .firestore()
       .collection('userWatched')
@@ -40,6 +51,8 @@ const MovieControls = ({ movie, type, user }) => {
   }
 
   const deleteUserWatchlist = () => {
+    setUserWatchlist(userWatchlist.filter((i) => i.id !== movie.id))
+
     firebase
       .firestore()
       .collection('userWatchlist')
@@ -48,6 +61,8 @@ const MovieControls = ({ movie, type, user }) => {
   }
 
   const deleteUserWatched = () => {
+    setUserWatched(userWatched.filter((i) => i.id !== movie.id))
+
     firebase
       .firestore()
       .collection('userWatched')

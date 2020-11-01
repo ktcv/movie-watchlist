@@ -3,10 +3,10 @@ import { GlobalContext } from '../context/GlobalState'
 import MovieCard from './MovieCard'
 import Modal from './Modal'
 import MovieDetail from './MovieDetail'
-import useContent from '../hooks/useContent'
+import { UserContentContext } from '../context/UserContentContext'
 
 const Watchlist = ({ user }) => {
-  const { userWatchlist } = useContent('userWatchlist')
+  const { userWatchlist } = useContext(UserContentContext)
   // access watchlist from global context
   const { watchlist } = useContext(GlobalContext)
 

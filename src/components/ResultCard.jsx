@@ -1,12 +1,16 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { FirebaseContext } from '../context/firebase'
-import useContent from '../hooks/useContent'
+import { UserContentContext } from '../context/UserContentContext'
 
 const ResultCard = ({ movie, showModal, user }) => {
   const { firebase } = useContext(FirebaseContext)
-  const { userWatchlist } = useContent('userWatchlist')
-  const { userWatched } = useContent('userWatched')
+  const {
+    userWatchlist,
+    userWatched,
+    setUserWatchlist,
+    setUserWatched,
+  } = useContext(UserContentContext)
 
   // access global context
   const {
@@ -17,6 +21,8 @@ const ResultCard = ({ movie, showModal, user }) => {
   } = useContext(GlobalContext)
 
   const moveMovieToUserWatchlist = () => {
+    setUserWatched(userWatched.filter((i) => i.id !== movie.id))
+
     firebase
       .firestore()
       .collection('userWatchlist')
@@ -30,6 +36,8 @@ const ResultCard = ({ movie, showModal, user }) => {
   }
 
   const moveMovieToUserWatched = () => {
+    setUserWatchlist(userWatchlist.filter((i) => i.id !== movie.id))
+
     firebase
       .firestore()
       .collection('userWatched')
