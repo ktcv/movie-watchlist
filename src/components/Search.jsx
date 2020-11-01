@@ -38,12 +38,12 @@ const Add = ({ user }) => {
       .then((data) => {
         if (!data.errors) {
           const filteredResults = data.results.filter(
-            (result) => result.title != '' && result.vote_average > 0
+            (result) => result.title != ''
           )
-          const sortedResults = filteredResults.sort((a, b) =>
-            a.vote_average < b.vote_average ? 1 : -1
-          )
-          setResults(sortedResults)
+          // const sortedResults = filteredResults.sort((a, b) =>
+          //   a.vote_average < b.vote_average ? 1 : -1
+          // )
+          setResults(filteredResults)
         } else {
           setResults([])
         }
