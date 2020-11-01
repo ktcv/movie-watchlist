@@ -8,7 +8,7 @@ const Footer = ({ user }) => {
   return (
     <footer>
       {user ? (
-        <p onClick={firebase.auth().signOut()}>Signout</p>
+        <p onClick={() => firebase.auth().signOut()}>Signout</p>
       ) : (
         <Link to='/signin'>Secret Signin</Link>
       )}
