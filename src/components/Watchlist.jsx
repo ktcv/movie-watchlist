@@ -6,11 +6,12 @@ import MovieDetail from './MovieDetail'
 import { UserContentContext } from '../context/UserContentContext'
 
 const Watchlist = ({ user }) => {
-  const { userWatchlist } = useContext(UserContentContext)
+  let { userWatchlist } = useContext(UserContentContext)
   // access watchlist from global context
   let { watchlist } = useContext(GlobalContext)
 
   watchlist = watchlist.sort((a, b) => (a.title > b.title ? 1 : -1))
+  userWatchlist = userWatchlist.sort((a, b) => (a.title > b.title ? 1 : -1))
 
   // modal state
   const [modalVisible, setModalVisible] = useState(false)
