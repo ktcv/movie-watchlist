@@ -4,7 +4,7 @@ import { GlobalContext } from '../context/GlobalState'
 const ResultCard = ({ movie, showModal }) => {
   // access global context
   const {
-    addMovieToWatchlist,
+    moveMovieToWatchlist,
     moveMovieToWatched,
     watchlist,
     watched,
@@ -14,7 +14,7 @@ const ResultCard = ({ movie, showModal }) => {
   const inWatchlist = watchlist.find((m) => m.id === movie.id)
   const inWatched = watched.find((m) => m.id === movie.id)
   // disable button if already in watchlist or watched
-  const disableButton = inWatchlist || inWatched ? true : false
+  const disableButton = inWatchlist ? true : false
   // disable button if already in watched
   const disableWatched = inWatched ? true : false
 
@@ -48,7 +48,7 @@ const ResultCard = ({ movie, showModal }) => {
         <div className='controls'>
           <button
             className='button-text'
-            onClick={() => addMovieToWatchlist(movie)}
+            onClick={() => moveMovieToWatchlist(movie)}
             disabled={disableButton}
           >
             + Watchlist
