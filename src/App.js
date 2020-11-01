@@ -30,7 +30,7 @@ const App = () => {
         value={{ userWatchlist, userWatched, setUserWatchlist, setUserWatched }}
       >
         <Router basename='/' exact>
-          <Header />
+          <Header user={user} />
 
           <Switch>
             <Route exact path={['/', '/search']}>

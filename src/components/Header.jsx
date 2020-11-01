@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <header>
       <div className='container'>
         <div className='inner-content'>
           <div className='brand'>
-            <Link to='/'>S&K Movies</Link>
+            <Link to='/'>S & K</Link>
           </div>
 
           <ul className='nav-links'>
