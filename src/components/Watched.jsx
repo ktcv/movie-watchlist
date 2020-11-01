@@ -3,8 +3,10 @@ import { GlobalContext } from '../context/GlobalState'
 import MovieCard from './MovieCard'
 import Modal from './Modal'
 import MovieDetail from './MovieDetail'
+import useContent from '../hooks/useContent'
 
-const Watched = () => {
+const Watched = ({ user }) => {
+  const { userWatched } = useContent('userWatched')
   // access watched from global context
   const { watched } = useContext(GlobalContext)
 
@@ -32,11 +34,34 @@ const Watched = () => {
           <h1 className='heading'>Watched Movies</h1>
 
           <span className='count-pill'>
-            {watched.length} {watched.length === 1 ? 'Movie' : 'Movies'}
+            {user
+              ? `${userWatched.length} ${
+                  userWatched.length === 1 ? 'Movie' : 'Movies'
+                }`
+              : `${watched.length} ${
+                  watched.length === 1 ? 'Movie' : 'Movies'
+                }`}
           </span>
         </div>
-
-        {watched.length > 0 ? (
+        {user ? (
+          // Show if logged in
+          userWatched.length > 0 ? (
+            <div className='movie-grid'>
+              {userWatched.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  showModal={showModal}
+                  type='watched'
+                  user={user}
+                />
+              ))}
+            </div>
+          ) : (
+            <h2 className='no-movies'>You haven't watched any movies yet!</h2>
+          )
+        ) : // Show if not logged in
+        watched.length > 0 ? (
           <div className='movie-grid'>
             {watched.map((movie) => (
               <MovieCard

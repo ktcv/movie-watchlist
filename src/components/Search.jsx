@@ -4,7 +4,7 @@ import ResultCard from './ResultCard'
 import Modal from './Modal'
 import MovieDetail from './MovieDetail'
 
-const Add = () => {
+const Add = ({ user }) => {
   const [query, setQuery] = useState('')
   const [debouncedQuery] = useDebounce(query, 250)
   const [results, setResults] = useState([])
@@ -66,7 +66,7 @@ const Add = () => {
             {results.length > 0 &&
               results.map((movie) => (
                 <li key={movie.id}>
-                  <ResultCard movie={movie} showModal={showModal} />
+                  <ResultCard movie={movie} showModal={showModal} user={user} />
                 </li>
               ))}
           </ul>

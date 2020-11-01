@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
+import { FirebaseContext } from '../context/firebase'
 
-const MovieControls = ({ movie, type }) => {
+const MovieControls = ({ movie, type, user }) => {
+  const { firebase } = useContext(FirebaseContext)
+
   // access global context
   const {
     removeMovieFromWatchlist,
@@ -10,24 +13,66 @@ const MovieControls = ({ movie, type }) => {
     moveMovieToWatchlist,
   } = useContext(GlobalContext)
 
+  const moveMovieToUserWatchlist = () => {
+    firebase
+      .firestore()
+      .collection('userWatchlist')
+      .doc(movie.id.toString())
+      .set(movie)
+    firebase
+      .firestore()
+      .collection('userWatched')
+      .doc(movie.id.toString())
+      .delete()
+  }
+
+  const moveMovieToUserWatched = () => {
+    firebase
+      .firestore()
+      .collection('userWatched')
+      .doc(movie.id.toString())
+      .set(movie)
+    firebase
+      .firestore()
+      .collection('userWatchlist')
+      .doc(movie.id.toString())
+      .delete()
+  }
+
+  const deleteUserWatchlist = () => {
+    firebase
+      .firestore()
+      .collection('userWatchlist')
+      .doc(movie.id.toString())
+      .delete()
+  }
+
+  const deleteUserWatched = () => {
+    firebase
+      .firestore()
+      .collection('userWatched')
+      .doc(movie.id.toString())
+      .delete()
+  }
+
   const handleMoveToWatched = (event) => {
     event.stopPropagation()
-    moveMovieToWatched(movie)
+    user ? moveMovieToUserWatched() : moveMovieToWatched(movie)
   }
 
   const handleRemoveFromWatchlist = (event) => {
     event.stopPropagation()
-    removeMovieFromWatchlist(movie.id)
+    user ? deleteUserWatchlist() : removeMovieFromWatchlist(movie.id)
   }
 
   const handleMoveToWatchlist = (event) => {
     event.stopPropagation()
-    moveMovieToWatchlist(movie)
+    user ? moveMovieToUserWatchlist() : moveMovieToWatchlist(movie)
   }
 
   const handleRemoveFromWatched = (event) => {
     event.stopPropagation()
-    removeMovieFromWatched(movie.id)
+    user ? deleteUserWatched() : removeMovieFromWatched(movie.id)
   }
 
   return (
@@ -41,7 +86,7 @@ const MovieControls = ({ movie, type }) => {
           <button className='ctrl-btn'>
             <i
               className='fa-fw fa fa-times'
-              onClick={handleRemoveFromWatchlist}
+              onClick={(event) => handleRemoveFromWatchlist(event)}
             ></i>
           </button>
         </>
@@ -52,7 +97,7 @@ const MovieControls = ({ movie, type }) => {
           <button className='ctrl-btn'>
             <i
               className='fa-fw far fa-eye-slash'
-              onClick={handleMoveToWatchlist}
+              onClick={(event) => handleMoveToWatchlist(event)}
             ></i>
           </button>
 

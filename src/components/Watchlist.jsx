@@ -3,8 +3,10 @@ import { GlobalContext } from '../context/GlobalState'
 import MovieCard from './MovieCard'
 import Modal from './Modal'
 import MovieDetail from './MovieDetail'
+import useContent from '../hooks/useContent'
 
-const Watchlist = () => {
+const Watchlist = ({ user }) => {
+  const { userWatchlist } = useContent('userWatchlist')
   // access watchlist from global context
   const { watchlist } = useContext(GlobalContext)
 
@@ -32,11 +34,34 @@ const Watchlist = () => {
           <h1 className='heading'>Watchlist</h1>
 
           <span className='count-pill'>
-            {watchlist.length} {watchlist.length === 1 ? 'Movie' : 'Movies'}
+            {user
+              ? `${userWatchlist.length} ${
+                  userWatchlist.length === 1 ? 'Movie' : 'Movies'
+                }`
+              : `${watchlist.length} ${
+                  watchlist.length === 1 ? 'Movie' : 'Movies'
+                }`}
           </span>
         </div>
-
-        {watchlist.length > 0 ? (
+        {user ? (
+          // Show if logged in
+          userWatchlist.length > 0 ? (
+            <div className='movie-grid'>
+              {userWatchlist.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  showModal={showModal}
+                  type='watchlist'
+                  user={user}
+                />
+              ))}
+            </div>
+          ) : (
+            <h2 className='no-movies'>No movies in your list, add some!</h2>
+          )
+        ) : // Show if not logged in
+        watchlist.length > 0 ? (
           <div className='movie-grid'>
             {watchlist.map((movie) => (
               <MovieCard

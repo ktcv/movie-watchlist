@@ -1,7 +1,7 @@
 import React from 'react'
 import MovieControls from './MovieControls'
 
-const MovieCard = ({ movie, showModal, type }) => {
+const MovieCard = ({ movie, showModal, type, user }) => {
   return (
     <div className='movie-card' onClick={() => showModal(movie)}>
       <div className='overlay'></div>
@@ -17,7 +17,7 @@ const MovieCard = ({ movie, showModal, type }) => {
         </div>
       )}
 
-      <MovieControls type={type} movie={movie} />
+      <MovieControls type={type} movie={movie} user={user} />
     </div>
   )
 }

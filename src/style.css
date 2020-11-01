@@ -394,6 +394,10 @@ header .nav-links li:last-child {
   .modal-main img {
     display: none;
   }
+
+  .modal-main p {
+    font-size: 12px;
+  }
 }
 
 .display-block {
@@ -439,14 +443,14 @@ header .nav-links li:last-child {
 /* Footer */
 
 footer {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 0px;
   right: 0;
   padding: 10px;
 }
 
-footer a,
-p {
+footer p,
+footer a {
   text-decoration: none;
   color: var(--primary);
   font-size: 10px;
@@ -458,6 +462,7 @@ p {
 
 .form-container {
   min-width: 250px;
+  max-width: 350px;
   width: 50%;
   margin: auto;
   align-self: center;
@@ -473,7 +478,7 @@ p {
   margin-bottom: 12px;
   border-radius: 6px;
   border: 0;
-  padding: 5px 20px;
+  padding: 8px 20px;
 }
 
 .form-container button {
@@ -481,7 +486,7 @@ p {
   border-radius: 6px;
   border: 0;
   background-color: lightgray;
-  padding: 5px 20px;
+  padding: 8px 20px;
 }
 
 .form-container button:disabled {

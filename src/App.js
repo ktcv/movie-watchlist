@@ -22,15 +22,15 @@ const App = () => {
 
         <Switch>
           <Route exact path={['/', '/search']}>
-            <Search />
+            <Search user={user} />
           </Route>
 
           <Route path='/watchlist' exact>
-            <Watchlist />
+            <Watchlist user={user} />
           </Route>
 
           <Route path='/watched' exact>
-            <Watched />
+            <Watched user={user} />
           </Route>
 
           <Route path='/signin' exact>

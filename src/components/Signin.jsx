@@ -19,7 +19,7 @@ const Signin = () => {
       .auth()
       .signInWithEmailAndPassword(emailAddress, password)
       .then(() => {
-        history.push('/hello')
+        history.push('/watchlist')
       })
       .catch((error) => {
         setPassword('')

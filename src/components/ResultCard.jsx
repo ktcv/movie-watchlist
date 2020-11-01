@@ -1,7 +1,13 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
+import { FirebaseContext } from '../context/firebase'
+import useContent from '../hooks/useContent'
 
-const ResultCard = ({ movie, showModal }) => {
+const ResultCard = ({ movie, showModal, user }) => {
+  const { firebase } = useContext(FirebaseContext)
+  const { userWatchlist } = useContent('userWatchlist')
+  const { userWatched } = useContent('userWatched')
+
   // access global context
   const {
     moveMovieToWatchlist,
@@ -10,9 +16,47 @@ const ResultCard = ({ movie, showModal }) => {
     watched,
   } = useContext(GlobalContext)
 
+  const moveMovieToUserWatchlist = () => {
+    firebase
+      .firestore()
+      .collection('userWatchlist')
+      .doc(movie.id.toString())
+      .set(movie)
+    firebase
+      .firestore()
+      .collection('userWatched')
+      .doc(movie.id.toString())
+      .delete()
+  }
+
+  const moveMovieToUserWatched = () => {
+    firebase
+      .firestore()
+      .collection('userWatched')
+      .doc(movie.id.toString())
+      .set(movie)
+    firebase
+      .firestore()
+      .collection('userWatchlist')
+      .doc(movie.id.toString())
+      .delete()
+  }
+
+  const handleWatchlist = (movie) => {
+    user ? moveMovieToUserWatchlist(movie) : moveMovieToWatchlist(movie)
+  }
+
+  const handleWatched = (movie) => {
+    user ? moveMovieToUserWatched(movie) : moveMovieToWatched(movie)
+  }
+
   // check if current movie is already in watchlist or watched
-  const inWatchlist = watchlist.find((m) => m.id === movie.id)
-  const inWatched = watched.find((m) => m.id === movie.id)
+  const inWatchlist = user
+    ? userWatchlist.find((m) => m.id === movie.id)
+    : watchlist.find((m) => m.id === movie.id)
+  const inWatched = user
+    ? userWatched.find((m) => m.id === movie.id)
+    : watched.find((m) => m.id === movie.id)
   // disable button if already in watchlist or watched
   const disableButton = inWatchlist ? true : false
   // disable button if already in watched
@@ -48,7 +92,7 @@ const ResultCard = ({ movie, showModal }) => {
         <div className='controls'>
           <button
             className='button-text'
-            onClick={() => moveMovieToWatchlist(movie)}
+            onClick={() => handleWatchlist(movie)}
             disabled={disableButton}
           >
             + Watchlist
@@ -56,7 +100,7 @@ const ResultCard = ({ movie, showModal }) => {
 
           <button
             className='button-text'
-            onClick={() => moveMovieToWatched(movie)}
+            onClick={() => handleWatched(movie)}
             disabled={disableWatched}
           >
             + Watched
