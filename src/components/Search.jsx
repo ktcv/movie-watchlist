@@ -37,7 +37,10 @@ const Add = ({ user }) => {
       .then((response) => response.json())
       .then((data) => {
         if (!data.errors) {
-          setResults(data.results)
+          const sortedResults = data.results.sort((a, b) =>
+            a.vote_average < b.vote_average ? 1 : -1
+          )
+          setResults(sortedResults)
         } else {
           setResults([])
         }
