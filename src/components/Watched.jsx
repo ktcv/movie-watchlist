@@ -11,7 +11,6 @@ const Watched = ({ user }) => {
   let { watched } = useContext(GlobalContext)
 
   watched = watched.sort((a, b) => (a.title > b.title ? 1 : -1))
-  userWatched = userWatched.sort((a, b) => (a.title > b.title ? 1 : -1))
 
   // modal state
   const [modalVisible, setModalVisible] = useState(false)

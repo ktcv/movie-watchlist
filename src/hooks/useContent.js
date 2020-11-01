@@ -11,6 +11,7 @@ const useContent = () => {
     firebase
       .firestore()
       .collection('userWatchlist')
+      .orderBy('title')
       .get()
       .then((data) => {
         const allContent = data.docs.map((doc) => ({
@@ -31,6 +32,7 @@ const useContent = () => {
     firebase
       .firestore()
       .collection('userWatched')
+      .orderBy('title')
       .get()
       .then((data) => {
         const allContent = data.docs.map((doc) => ({
