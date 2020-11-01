@@ -326,11 +326,27 @@ header .nav-links li:last-child {
   border: 3px solid var(--secondary);
 }
 
+.meta {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  bottom: 0;
+  padding: 10px;
+  background-color: #0000005f;
+}
+
+.meta p {
+  font-size: 12px;
+  color: white;
+  padding: 2px;
+  margin: 0;
+}
+
 .movie-card .inner-card-controls {
   display: inline;
   background-color: red;
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.8);
@@ -338,6 +354,7 @@ header .nav-links li:last-child {
   padding: 3px;
   opacity: 0;
   transition: all 0.3s ease;
+  z-index: 100;
 }
 
 .movie-card:hover .inner-card-controls {
@@ -373,6 +390,7 @@ header .nav-links li:last-child {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 101;
 }
 
 .modal-main {

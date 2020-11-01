@@ -17,6 +17,12 @@ const MovieCard = ({ movie, showModal, type, user }) => {
         </div>
       )}
 
+      <div className='meta'>
+        <p className='subtitle'>{movie.title}</p>
+        <p className='rating'>
+          <i className='fas fa-star'></i> {movie.vote_average}
+        </p>
+      </div>
       <MovieControls type={type} movie={movie} user={user} />
     </div>
   )
