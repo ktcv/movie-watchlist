@@ -32,12 +32,15 @@ const Add = ({ user }) => {
     }
 
     fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${debouncedQuery}`
+      `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${debouncedQuery}`
     )
       .then((response) => response.json())
       .then((data) => {
         if (!data.errors) {
-          const sortedResults = data.results.sort((a, b) =>
+          const filteredResults = data.results.filter(
+            (result) => result.title != '' && result.vote_average > 0
+          )
+          const sortedResults = filteredResults.sort((a, b) =>
             a.vote_average < b.vote_average ? 1 : -1
           )
           setResults(sortedResults)
